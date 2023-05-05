@@ -298,7 +298,7 @@ public class FinancialTracker {
                 case "0":
                     break;
 
-                    //running = false;
+                //running = false;
                 default:
                     System.out.println("Invalid option");
                     break;
@@ -323,7 +323,12 @@ public class FinancialTracker {
     }}
 
     private static void previousMonth() {
+        LocalDate now = LocalDate.now();
         for (Transaction transaction: transactions){
+            if (transaction.getDate().getMonth() == now.getMonth().minus(1) && transaction.getDate().getYear() == now.getYear()) {
+
+                System.out.println(transaction.getDate() + "|" + transaction.getTime() + "|" + transaction.getDescription()
+                        + "|" + transaction.getVendor() + "|" + transaction.getAmount());
 
         }
         // Generate a report for all transactions within the previous month,
@@ -331,19 +336,35 @@ public class FinancialTracker {
 
 
 
-    }
+    }}
 
     private static void yearToDate() {
+            for (Transaction transaction : transactions) {
+                LocalDate date = LocalDate.now();
+
+                if (transaction.getDate().getYear() == date.getYear()) {
+
+                    System.out.println(transaction.getDate() + "|" + transaction.getTime() + "|" + transaction.getDescription()
+                            + "|" + transaction.getVendor() + "|" + transaction.getAmount());
+                }
 
         // This method filters the transactions by date and prints a report to the console.
         // It takes two parameters: startDate and endDate, which represent the range of dates to filter by.
         // The method loops through the transactions list and checks each transaction's date against the date range.
         // Transactions that fall within the date range are printed to the console.
         // If no transactions fall within the date range, the method prints a message indicating that there are no results.
-    }
+    }}
     private static void previousYear() {
+        for (Transaction transaction : transactions) {
+            LocalDate date = LocalDate.now();
 
-    }
+            if (transaction.getDate().getYear() == date.getYear() - 1) {
+
+                System.out.println(transaction.getDate() + "|" + transaction.getTime() + "|" + transaction.getDescription()
+                        + "|" + transaction.getVendor() + "|" + transaction.getAmount());
+            }
+
+    }}
 
 
     private static void searchByVendor(String vendor) {
